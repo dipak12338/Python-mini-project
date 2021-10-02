@@ -1,0 +1,99 @@
+1 
+Introduction & Components of Python:
+Understanding Python
+Role of Python in AI and Data science
+Installation and Working with Python
+Types and Operation
+Python Object Types-
+Number, Strings, Lists,Dictionaries, Tuples, Files, 
+User Defined Classes
+Understanding python blocks
+Python Program Flow Control
+Conditional blocks using if, else and elif
+Simple for loops in python
+For loop using ranges,string, list and dictionaries
+Use of while loops in python
+Loop manipulation using pass, continue, break and else
+Programming using Python conditional and loops block
+===========================================================
+2 Python Functions, Modules & Packages:
+Function Basics-Scope, nested function, non-local statements
+Arguments Passing, 
+Anonymous Function: lambda
+Decorators and Generators
+Module basic usage, namespaces, reloading modules.
+Package: import basics
+Python namespace packages
+===========================================================
+3 Python Object Oriented Programming:
+Concept of class, object or instances, method call
+Constructor, class attributes and destructors
+Real time use of class in live projects
+Inheritance, super class and overloading operators,
+Static and class methods
+Adding and retrieving dynamic attributes of classes
+Programming using OOPS
+============================================================
+4 Python Regular Expression:
+Powerful pattern matching and searching
+Power of pattern searching using regex in python
+Real time parsing of data using regex
+Password, email, url validation using regular expression
+Pattern finding programs using regular expression
+
+=======================================================
+5 Python Multithreading and Exception Handling:
+Exception Handling
+Avoiding code break using exception handling
+Safe guarding file operation using exception handling
+Handling and helping developer with error code
+Programming using Exception handling
+Multithreading
+Understanding threads
+Synchronizing the threads
+Programming using multithreading
+=============================================
+6 Python File Operation:
+Reading config files in python
+Writing log files in python
+Understanding read functions, read(), readline() and
+readlines()
+Understanding write
+functions, write() and writelines()
+Manipulating file pointer using seek
+Programming using file operations
+=======================================
+7 Python Database Interaction:
+SQL Database connection using python
+Creating and searching tables
+Reading and storing config information on database
+Programming using database connections
+======================================
+8 Python For Data Analysis:
+Numpy:
+Introduction to numpy
+Creating arrays, Using arrays and Scalars
+Indexing Arrays, Array Transposition
+Universal Array Function
+Array Input and Output
+
+Pandas:
+What is pandas? Where it is used?
+Series in pandas, pandas DataFrames, Index objects,
+ReIndex
+Drop Entry, Selecting Entries
+Data Alignment, Rank and Sort
+Summary Statics, Missing Data, Index Hierarchy
+Matplotlib:
+Python for Data Visualization
+Introduction to Matplotlib
+Visualization Tools
+
+
+
+
+
+
+dip21@mongo
+
+

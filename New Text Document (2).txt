@@ -1,0 +1,32 @@
+from tkinter import *
+root=Tk()
+root.title("RadioButton in python")
+
+topings= [
+("A","A"),
+("B","B"),
+("C","C"),
+]
+pizza=StringVar()
+pizza.set("A")   # otherwise it selects all
+
+for text,x in topings:                     #it creates radio buttons 
+    Radiobutton(root,text=text,variable=pizza,value=x).pack(anchor=W)
+    
+def clicked(value):            
+    lbl=Label(root,text=value,bg="gray")
+    lbl.pack()
+    
+
+btn = Button(root,text="Click Here",command=lambda: clicked(pizza.get()))
+btn.pack()
+
+root.mainloop()
+
+
+
+#r= IntVar()
+
+"""Radiobutton(root,text="Mango",variable=r,value=1).pack()
+
+Radiobutton(root,text="Oranges",variable=r,value=1).pack() """

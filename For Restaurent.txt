@@ -1,0 +1,302 @@
+
+=================================================
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Microsoft.AspNet.Membership.OpenAuth;
+
+namespace Restaurant_App.Account
+{
+    public partial class Register : Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            RegisterUser.ContinueDestinationPageUrl = Request.QueryString["ReturnUrl"];
+        }
+
+        protected void RegisterUser_CreatedUser(object sender, EventArgs e)
+        {
+            FormsAuthentication.SetAuthCookie(RegisterUser.UserName, createPersistentCookie: false);
+
+            string continueUrl = RegisterUser.ContinueDestinationPageUrl;
+            if (!OpenAuth.IsLocalUrl(continueUrl))
+            {
+                continueUrl = "~/";
+            }
+            Response.Redirect(continueUrl);
+        }
+    }
+}
+
+================================================
+
+<fieldset>
+                        <legend>Registration Form</legend>
+                        <ol>
+                            <li>
+                                <asp:Label runat="server" AssociatedControlID="UserName">User name</asp:Label>
+                                <asp:TextBox runat="server" ID="UserName" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName"
+                                    CssClass="field-validation-error" ErrorMessage="The user name field is required." />
+                            </li>
+                            <li>
+                                <asp:Label runat="server" AssociatedControlID="Email">Email address</asp:Label>
+                                <asp:TextBox runat="server" ID="Email" TextMode="Email" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
+                                    CssClass="field-validation-error" ErrorMessage="The email address field is required." />
+                            </li>
+                            <li>
+                                <asp:Label runat="server" AssociatedControlID="Password">Password</asp:Label>
+                                <asp:TextBox runat="server" ID="Password" TextMode="Password" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="Password"
+                                    CssClass="field-validation-error" ErrorMessage="The password field is required." />
+                            </li>
+                            <li>
+                                <asp:Label runat="server" AssociatedControlID="ConfirmPassword">Confirm password</asp:Label>
+                                <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPassword"
+                                     CssClass="field-validation-error" Display="Dynamic" ErrorMessage="The confirm password field is required." />
+                                <asp:CompareValidator runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword"
+                                     CssClass="field-validation-error" Display="Dynamic" ErrorMessage="The password and confirmation password do not match." />
+                            </li>
+                        </ol>
+                        <asp:Button runat="server" CommandName="MoveNext" Text="Register" />
+                    </fieldset>
+
+
+=======================================
+
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Restaurant_App.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <asp:PlaceHolder runat="server">     
+          <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>  
+    <webopt:BundleReference runat="server" Path="~/Content/css" /> 
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    <form runat="server">
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    <a runat="server" href="~/">your log here</a>
+                </p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul>
+                                <li><a id="registerLink" runat="server" href="~/Account/Register.aspx">Register</a></li>
+                                <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Log in</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <p>
+                                Hello, <a runat="server" class="username" href="~/Account/Manage.aspx" title="Manage your account">
+                                    <asp:LoginName runat="server" CssClass="username" /></a>!
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
+                            </p>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/About.aspx">About</a></li>
+                        <li><a runat="server" href="~/Contact.aspx">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+        <section class="content-wrapper main-content clear-fix">
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+            </div>
+        </div>
+    </footer>
+    </form>
+</body>
+</html>
+=============================
+double myDouble = 9.78;
+int myInt = (int) myDouble;
+
+
+
+==========================
+
+
+
+  if (!IsPostBack)
+            { 
+                cmd = new OleDbCommand("select * from TblStudent where sname='" + Session["un"].ToString() + "'", con);
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    txtsn.Value = dr.GetValue(1).ToString();
+                    txtmob.Value = dr.GetValue(3).ToString();
+                    txtaddr.Value = dr.GetValue(4).ToString();
+                    txtcity.Value = dr.GetValue(5).ToString();
+                    txtpincode.Value = dr.GetValue(6).ToString();
+                    txtemail.Value = dr.GetValue(9).ToString();
+                }
+                else
+                {
+                    txtsn.Value = "Sorry.....";
+                }
+               
+
+====================================================================================================================
+
+
+Round 1: Assignment based on domain you've applied for.
+
+An assignment will be given to the candidate based on technologies that are apt for the role.
+
+You are supposed to complete the assignment and submit it within given time frame to be qualified for next round.
+
+
+Round 2: Telephonic Interview
+
+Our Subject Matter Experts (SMEs) will have a telephonic round of interview with the candidate.
+
+
+Round 3: Video Interview
+
+In the video interview, the candidate will be asked to share the screen as well as the candidate’s video.
+
+A spontaneous assignment with the problem statement and time limit will be given to the candidate by our SME.
+
+The candidate will need to complete the assignment during the video interview round.
+
+
+Candidate On-boarding:
+
+Once the candidate successfully clears all the rounds, they will be given an email confirmation for further on-boarding process.
+
+
+Pre-requisites:
+
+1. You should have a working computer with high speed internet and web cam facility.
+
+2. This is work from home job, hence for the ongoing job, you are supposed to have a good and fast computer to carry out the work required.
+
+Assignments:
+
+Kindly complete the below assignments by Sunday, 7th Oct, 2020, by 6 PM, and send it at business@thumbstack.in
+
+Problem statement:
+
+A customer walks into a restaurant. Scans through the menu card and selects 2 food items.
+He calls the waiter and places order for two food items.
+He likes the food.
+He orders one more item from the menu and consumes it.
+He asks for the final bill and pays at the billing counter.
+He adds 10% tip on the order and leaves the restaurant.
+
+Digitally transform this process into a software system using technology of your choice.
+
+Must have feature: 
+- API endpoints using asp.net web api
+- Database integration using entity framework
+
+Good to have features:
+- Unit tests for controllers and action methods
+- Frontend (can be made using angular and bootstrap or any other frontend technology of your choice)
+
+Will be happy to see design pattern implementation like Dependency injection, Unit of work  and Database transaction if possible.
+
+You are supposed to complete this assignment in two days.  
+Expected software can be roughly made but should address the problem statement properly.
+
+You are supposed to upload the software on your own server if needed. If the software is a mobile application, upload into a Google Drive and send a public link.
+The code should be uploaded on Github and link should be included in the submission.
+If needed you can send a video of the output, it is optional.
+
+Kindly revert if you have any questions regarding the problem statement.
+
+
+
+I don't want to waste time. Instead of that I want to work on any project. And here my responsibility is to giving full time to your project/ interenship
+
+
+===========================================================
+====================================================
+
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+<configuration>
+  <configSections>
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+  </configSections>
+  <connectionStrings>
+    <add name="DefaultConnection" providerName="System.Data.SqlClient" connectionString="Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-WebApplication1-20201008120737;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnet-WebApplication1-20201008120737.mdf" />
+  </connectionStrings>
+  <system.web>
+    <compilation debug="true" targetFramework="4.5" />
+    <httpRuntime targetFramework="4.5" />
+    <pages>
+      <namespaces>
+        <add namespace="System.Web.Optimization" />
+      </namespaces>
+      <controls>
+        <add assembly="Microsoft.AspNet.Web.Optimization.WebForms" namespace="Microsoft.AspNet.Web.Optimization.WebForms" tagPrefix="webopt" />
+      </controls>
+    </pages>
+    <authentication mode="Forms">
+      <forms loginUrl="~/Account/Login.aspx" timeout="2880" />
+    </authentication>
+    <profile defaultProvider="DefaultProfileProvider">
+      <providers>
+        <add name="DefaultProfileProvider" type="System.Web.Providers.DefaultProfileProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection" applicationName="/" />
+      </providers>
+    </profile>
+    <membership defaultProvider="DefaultMembershipProvider">
+      <providers>
+        <add name="DefaultMembershipProvider" type="System.Web.Providers.DefaultMembershipProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection" enablePasswordRetrieval="false" enablePasswordReset="true" requiresQuestionAndAnswer="false" requiresUniqueEmail="false" maxInvalidPasswordAttempts="5" minRequiredPasswordLength="6" minRequiredNonalphanumericCharacters="0" passwordAttemptWindow="10" applicationName="/" />
+      </providers>
+    </membership>
+    <roleManager defaultProvider="DefaultRoleProvider">
+      <providers>
+        <add name="DefaultRoleProvider" type="System.Web.Providers.DefaultRoleProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection" applicationName="/" />
+      </providers>
+    </roleManager>
+    <sessionState mode="InProc" customProvider="DefaultSessionProvider">
+      <providers>
+        <add name="DefaultSessionProvider" type="System.Web.Providers.DefaultSessionStateProvider, System.Web.Providers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" connectionStringName="DefaultConnection" />
+      </providers>
+    </sessionState>
+  </system.web>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="v11.0" />
+      </parameters>
+    </defaultConnectionFactory>
+  </entityFramework>
+</configuration>

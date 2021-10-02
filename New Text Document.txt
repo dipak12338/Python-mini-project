@@ -1,0 +1,21 @@
+class Demo:
+ def __init__(self,fn,ln):
+  self.fn = fn
+  self.ln = ln
+ def printname(self):
+  print(self.fn,self.ln)
+
+obj =Demo("Dipak",21)
+obj.printname()
+
+
+class Demo:
+ def printname(self,a,b):
+   self.a=a
+   self.b=b
+   print(self.a)
+   print(self.b)
+
+obj =Demo()
+obj.printname(10,20)
+
